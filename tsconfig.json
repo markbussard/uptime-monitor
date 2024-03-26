@@ -1,8 +1,14 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
+    "checkJs": true,
     "skipLibCheck": true,
+    "target": "es2022",
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -18,9 +24,23 @@
       }
     ],
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": [
+        "./src/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    ".eslintrc.cjs",
+    "next.config.mjs",
+    "prettier.config.mjs",
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.cjs",
+    "**/*.js",
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

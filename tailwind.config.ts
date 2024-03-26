@@ -2,19 +2,29 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{ts,tsx,mdx}",
+    "./src/app/**/*.{ts,tsx,mdx}"
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
-    },
+      colors: {
+        dark: {
+          "900": "#111827", // Background color for the body
+          "800": "#1F2937" // Background color for the navbar and footer
+        },
+        gray: {
+          "400": "#9CA3AF", // Text color for secondary text
+          "300": "#D1D5DB" // Text color for less prominent information like testimonials
+        },
+        blue: {
+          "600": "#2563EB", // Primary button background color and icon color
+          "700": "#1D4ED8", // Primary button background color on hover state
+          "500": "#3B82F6" // Feature icon color
+        },
+        white: "#FFFFFF" // Primary text color
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 };
 export default config;
