@@ -1,4 +1,4 @@
-/** 
+/**
  * @type {import("eslint").Linter.Config}
  */
 const config = {
@@ -6,9 +6,7 @@ const config = {
   parserOptions: {
     project: true
   },
-  plugins: [
-    "@typescript-eslint"
-  ],
+  plugins: ["@typescript-eslint"],
   extends: [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended-type-checked",
@@ -20,15 +18,15 @@ const config = {
     "@typescript-eslint/consistent-type-imports": [
       "warn",
       {
-        "prefer": "type-imports",
-        "fixStyle": "inline-type-imports"
+        prefer: "type-imports",
+        fixStyle: "inline-type-imports"
       }
     ],
     "@typescript-eslint/no-unused-vars": [
       "error",
-      { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }
     ]
   }
-}
+};
 
 module.exports = config;
