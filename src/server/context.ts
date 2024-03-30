@@ -10,7 +10,7 @@ interface CreateContextOptions {
   headers: Headers;
 }
 
-export async function createTRPCContext(opts: CreateContextOptions) {
+export function createTRPCContext(opts: CreateContextOptions) {
   const innerContext = createInnerTRPCContext();
   return {
     ...innerContext,
