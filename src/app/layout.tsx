@@ -34,7 +34,7 @@ export default function RootLayout(props: RootLayoutProps) {
       <html lang="en" suppressHydrationWarning>
         <body
           className={cn(
-            "bg-dark-900 min-h-screen overflow-x-hidden antialiased",
+            "min-h-screen overflow-x-hidden bg-dark-900 antialiased",
             roboto.className
           )}
         >
