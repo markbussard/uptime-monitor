@@ -1,16 +1,17 @@
-import { Roboto } from "next/font/google";
+import { Inter as FontSans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 
 import "./globals.css";
 
 import type { Metadata } from "next";
 
+import { ThemeProvider } from "~/components/theme-provider";
 import { TRPCReactProvider } from "~/trpc/react";
 import { cn } from "~/utils";
 
-const roboto = Roboto({
-  weight: ["100", "300", "400", "500", "700", "900"],
-  subsets: ["latin"]
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans"
 });
 
 export const metadata: Metadata = {
@@ -34,11 +35,18 @@ export default function RootLayout(props: RootLayoutProps) {
       <html lang="en" suppressHydrationWarning>
         <body
           className={cn(
-            "min-h-screen overflow-x-hidden bg-dark-900 antialiased",
-            roboto.className
+            "min-h-screen bg-background font-sans text-foreground antialiased",
+            fontSans.variable
           )}
         >
-          <TRPCReactProvider>{props.children}</TRPCReactProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <TRPCReactProvider>{props.children}</TRPCReactProvider>
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
