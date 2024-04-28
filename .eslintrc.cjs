@@ -25,6 +25,10 @@ const config = {
     "@typescript-eslint/no-unused-vars": [
       "error",
       { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }
+    ],
+    "@typescript-eslint/no-misused-promises": [
+      2,
+      { checksVoidReturn: { attributes: false } },
     ]
   }
 };
