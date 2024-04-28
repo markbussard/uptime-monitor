@@ -50,9 +50,9 @@ export default function Home() {
             <br />
             No credit card required.
           </p>
-          <Link href="/register">
+          <Link href={userId ? "/dashboard" : "/register"}>
             <Button className="h-[52px] w-52 rounded-full text-lg">
-              Get Started
+              {userId ? "Go to Dashboard" : "Get Started"}
             </Button>
           </Link>
         </section>
