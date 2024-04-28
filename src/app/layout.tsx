@@ -6,6 +6,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 
 import { ThemeProvider } from "~/components/theme-provider";
+import { Toaster } from "~/components/ui/toaster";
 import { TRPCReactProvider } from "~/trpc/react";
 import { cn } from "~/utils";
 
@@ -46,6 +47,7 @@ export default function RootLayout(props: RootLayoutProps) {
             disableTransitionOnChange
           >
             <TRPCReactProvider>{props.children}</TRPCReactProvider>
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>
