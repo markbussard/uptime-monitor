@@ -1,21 +1,32 @@
+import {
+  type SignedInAuthObject,
+  type SignedOutAuthObject
+} from "@clerk/nextjs/server";
+
 import { db } from "./db";
 
-export function createInnerTRPCContext() {
+interface CreateInnerTRPCContentOptions {
+  auth: SignedInAuthObject | SignedOutAuthObject;
+  headers: Headers;
+}
+
+export function createInnerTRPCContext(opts: CreateInnerTRPCContentOptions) {
   return {
-    db
+    db,
+    ...opts
   };
 }
 
 interface CreateContextOptions {
   headers: Headers;
+  auth: SignedInAuthObject | SignedOutAuthObject;
 }
 
 export function createTRPCContext(opts: CreateContextOptions) {
-  const innerContext = createInnerTRPCContext();
-  return {
-    ...innerContext,
-    ...opts
-  };
+  return createInnerTRPCContext({
+    auth: opts.auth,
+    headers: opts.headers
+  });
 }
 
 export type Context = Awaited<ReturnType<typeof createTRPCContext>>;
