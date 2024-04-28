@@ -8,6 +8,9 @@ export const monitorRouter = createTRPCRouter({
     const monitors = await ctx.db.monitor.findMany({
       where: {
         userId
+      },
+      orderBy: {
+        updatedAt: "desc"
       }
     });
     return monitors;
