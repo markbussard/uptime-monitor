@@ -32,6 +32,8 @@ import {
   SelectValue
 } from "~/components/ui/select";
 import { Slider } from "~/components/ui/slider";
+import { ToastAction } from "~/components/ui/toast";
+import { useToast } from "~/components/ui/use-toast";
 import { useZodForm } from "~/hooks";
 import {
   CreateMonitorSchema,
@@ -73,22 +75,48 @@ export const NewMonitorDialog = () => {
     }
   });
 
-  const [mappedInterval, setMappedInterval] = useState(10);
+  const utils = trpc.useUtils();
+
+  const [mappedInterval, setMappedInterval] = useState(30);
+  const [open, setOpen] = useState(false);
 
   const timeout = zodForm.watch("timeout");
 
   const createMonitorMutation = trpc.monitor.create.useMutation();
 
+  const { toast } = useToast();
+
   const onSubmit = useCallback(
     async (values: CreateMonitorValues) => {
-      console.log(values);
-      await createMonitorMutation.mutateAsync(values);
+      try {
+        await createMonitorMutation.mutateAsync(values);
+        toast({
+          description: "Your new monitor has been created"
+        });
+        await utils.monitor.list.invalidate();
+        setOpen(false);
+        zodForm.reset();
+      } catch (e: unknown) {
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: "There was a problem with your request.",
+          action: (
+            <ToastAction
+              altText="Try again"
+              onClick={() => onSubmit(zodForm.getValues())}
+            >
+              Try again
+            </ToastAction>
+          )
+        });
+      }
     },
-    [createMonitorMutation]
+    [createMonitorMutation, utils, zodForm, toast]
   );
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={(open) => setOpen(open)}>
       <DialogTrigger asChild>
         <Button size="sm" className="text-sm">
           New Monitor
@@ -148,7 +176,7 @@ export const NewMonitorDialog = () => {
                         max={7.5}
                         min={0}
                         step={0.01}
-                        defaultValue={[0]}
+                        defaultValue={[2.5]}
                         onValueChange={(value) => {
                           const newValue = value[0];
                           const newValueRounded = Math.round(
