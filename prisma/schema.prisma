@@ -27,14 +27,14 @@ enum HttpMethodType {
 
 model Monitor {
   id             String         @id @default(cuid())
-  userId         String
+  userId         String         @map("user_id")
   name           String
   status         MonitorStatus  @default(STARTED)
   url            String
   interval       Int            @db.SmallInt
-  lastCheck      DateTime?
+  lastCheck      DateTime?      @map("last_check") @db.Timestamptz()
   timeout        Int            @default(15)
-  httpMethodType HttpMethodType
+  httpMethodType HttpMethodType @map("http_method_type")
   createdAt      DateTime       @default(now()) @map("created_at") @db.Timestamptz()
   updatedAt      DateTime       @updatedAt @map("updated_at") @db.Timestamptz()
 
