@@ -7,14 +7,14 @@ CREATE TYPE "http_method_type" AS ENUM ('HEAD', 'GET', 'POST', 'OPTIONS');
 -- CreateTable
 CREATE TABLE "monitor" (
     "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
+    "user_id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "status" "monitor_status" NOT NULL DEFAULT 'STARTED',
     "url" TEXT NOT NULL,
     "interval" SMALLINT NOT NULL,
-    "lastCheck" TIMESTAMP(3),
+    "last_check" TIMESTAMPTZ,
     "timeout" INTEGER NOT NULL DEFAULT 15,
-    "httpMethodType" "http_method_type" NOT NULL,
+    "http_method_type" "http_method_type" NOT NULL,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMPTZ NOT NULL,
 
