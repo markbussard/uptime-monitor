@@ -1,7 +1,5 @@
 import { trpc } from "~/trpc/server";
-import { GlobalStatsCard } from "./_components";
-import { MonitorList } from "./monitor-list";
-import { NewMonitorDialog } from "./new-monitor-dialog";
+import { GlobalStatsCard, MonitorList, NewMonitorDialog } from "./_components";
 
 export default async function Dashboard() {
   const monitors = await trpc.monitor.list();
