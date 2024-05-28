@@ -2,6 +2,7 @@ import "server-only";
 
 import { cache } from "react";
 import { headers } from "next/headers";
+import { auth } from "@clerk/nextjs";
 
 import { createTRPCContext } from "~/server/context";
 import { createCaller } from "~/server/root";
@@ -15,7 +16,8 @@ const createContext = cache(() => {
   heads.set("x-trpc-source", "rsc");
 
   return createTRPCContext({
-    headers: heads
+    headers: heads,
+    auth: auth()
   });
 });
 

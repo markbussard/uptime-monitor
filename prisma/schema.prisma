@@ -7,6 +7,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id String @id @default(cuid())
+enum MonitorStatus {
+  PAUSED
+  STARTED
+  UP
+  DOWN
+
+  @@map("monitor_status")
+}
+
+enum HttpMethodType {
+  HEAD
+  GET
+  POST
+  OPTIONS
+
+  @@map("http_method_type")
+}
+
+model Monitor {
+  id             String         @id @default(cuid())
+  userId         String         @map("user_id")
+  name           String
+  status         MonitorStatus  @default(STARTED)
+  url            String
+  interval       Int            @db.SmallInt
+  lastCheck      DateTime?      @map("last_check") @db.Timestamptz()
+  timeout        Int            @default(15)
+  httpMethodType HttpMethodType @map("http_method_type")
+  createdAt      DateTime       @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt      DateTime       @updatedAt @map("updated_at") @db.Timestamptz()
+
+  @@map("monitor")
 }

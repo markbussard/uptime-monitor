@@ -1,30 +1,79 @@
 import type { Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
-const config: Config = {
-  content: [
-    "./src/components/**/*.{ts,tsx,mdx}",
-    "./src/app/**/*.{ts,tsx,mdx}"
-  ],
+const config = {
+  darkMode: ["class"],
+  content: ["./src/components/**/*.{ts,tsx}", "./src/app/**/*.{ts,tsx,mdx}"],
+  prefix: "",
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px"
+      }
+    },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", ...fontFamily.sans]
+      },
       colors: {
-        dark: {
-          "900": "#111827", // Background color for the body
-          "800": "#1F2937" // Background color for the navbar and footer
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))"
         },
-        gray: {
-          "400": "#9CA3AF", // Text color for secondary text
-          "300": "#D1D5DB" // Text color for less prominent information like testimonials
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))"
         },
-        blue: {
-          "600": "#2563EB", // Primary button background color and icon color
-          "700": "#1D4ED8", // Primary button background color on hover state
-          "500": "#3B82F6" // Feature icon color
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))"
         },
-        white: "#FFFFFF" // Primary text color
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))"
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))"
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))"
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))"
+        }
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)"
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" }
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" }
+        }
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out"
       }
     }
   },
-  plugins: []
-};
+  plugins: [require("tailwindcss-animate")]
+} satisfies Config;
+
 export default config;
