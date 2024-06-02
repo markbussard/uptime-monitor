@@ -22,7 +22,7 @@ const navItems = [
   }
 ] as const;
 
-export const Sidebar = () => {
+export const AppSidebar = () => {
   const pathname = headers().get("x-next-pathname");
   return (
     <aside className="flex h-screen w-80 flex-col p-4 text-foreground">
