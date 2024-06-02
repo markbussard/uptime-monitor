@@ -1,4 +1,4 @@
-import { Sidebar } from "./_components";
+import { AppSidebar } from "../_components";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -7,7 +7,7 @@ interface DashboardLayoutProps {
 export default function DashboardLayout(props: DashboardLayoutProps) {
   return (
     <div className="flex flex-row">
-      <Sidebar />
+      <AppSidebar />
       <main className="flex w-full flex-1 flex-col overflow-y-auto">
         {props.children}
       </main>
