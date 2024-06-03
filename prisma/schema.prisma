@@ -37,6 +37,18 @@ model Monitor {
   httpMethodType HttpMethodType @map("http_method_type")
   createdAt      DateTime       @default(now()) @map("created_at") @db.Timestamptz()
   updatedAt      DateTime       @updatedAt @map("updated_at") @db.Timestamptz()
+  incidents      Incident[]
 
   @@map("monitor")
+}
+
+model Incident {
+  id        String    @id @default(cuid())
+  monitorId String    @map("monitor_id")
+  startTime DateTime  @map("start_time") @db.Timestamptz()
+  endTime   DateTime? @map("end_time") @db.Timestamptz()
+
+  monitor Monitor @relation(fields: [monitorId], references: [id])
+
+  @@map("incident")
 }
