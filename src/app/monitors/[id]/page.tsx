@@ -42,7 +42,12 @@ export default async function MonitorDetailsPage(
 
   return (
     <>
-      <BackButton variant="ghost" size="sm" className="-ml-2">
+      <BackButton
+        variant="ghost"
+        size="sm"
+        className="-ml-2"
+        fallbackUrl="/dashboard"
+      >
         <ChevronLeft size={20} className="mr-2" />
         Monitors
       </BackButton>
