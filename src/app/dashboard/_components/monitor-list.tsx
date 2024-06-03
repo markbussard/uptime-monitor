@@ -12,6 +12,7 @@ import {
 } from "~/components/ui/tooltip";
 import { trpc } from "~/trpc/react";
 import { type RouterOutputs } from "~/trpc/shared";
+import { formatMonitorInterval } from "~/utils";
 
 interface MonitorListProps {
   initialMonitors: RouterOutputs["monitor"]["list"];
@@ -24,11 +25,6 @@ const getMonitorIcon = (status: MonitorStatus) => {
   return <CircleCheck className="stroke-primary" />;
 };
 
-const formatInterval = (interval: number) => {
-  if (interval < 60) return `${interval} seconds`;
-  return `${Number(interval / 60).toFixed(0)} minutes`;
-};
-
 export const MonitorList = (props: MonitorListProps) => {
   const { initialMonitors } = props;
 
@@ -39,7 +35,7 @@ export const MonitorList = (props: MonitorListProps) => {
   return (
     <div>
       {monitorListQuery.data.map((monitor) => {
-        const formattedInterval = formatInterval(monitor.interval);
+        const formattedInterval = formatMonitorInterval(monitor.interval);
         return (
           <div
             key={monitor.id}
